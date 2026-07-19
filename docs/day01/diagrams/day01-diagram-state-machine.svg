@@ -1,0 +1,76 @@
+<svg viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1a1a1a" flood-opacity="0.16"/>
+    </filter>
+    <filter id="strongShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#1a1a1a" flood-opacity="0.26"/>
+    </filter>
+    <radialGradient id="blueGrad" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#E3F0FD"/>
+      <stop offset="100%" stop-color="#A9CDF3"/>
+    </radialGradient>
+    <radialGradient id="orangeGrad" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFEBD6"/>
+      <stop offset="100%" stop-color="#FFC38A"/>
+    </radialGradient>
+    <radialGradient id="greenGrad" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#DFF8E9"/>
+      <stop offset="100%" stop-color="#9EE3BE"/>
+    </radialGradient>
+    <radialGradient id="redGrad" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFE6E1"/>
+      <stop offset="100%" stop-color="#FFB3A6"/>
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8592A6"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="820" height="420" fill="#ffffff"/>
+  <text x="410" y="32" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="700" fill="#2A2E35">Event lifecycle states — Day 1</text>
+
+  <!-- CREATED -->
+  <circle cx="120" cy="200" r="66" fill="url(#blueGrad)" filter="url(#strongShadow)"/>
+  <text x="120" y="194" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#1E4A7A">CREATED</text>
+  <text x="120" y="212" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#1E4A7A">record built</text>
+  <text x="120" y="224" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#1E4A7A">in memory</text>
+
+  <line x1="186" y1="200" x2="254" y2="200" stroke="#8592A6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="220" y="188" text-anchor="middle" font-size="9.5" fill="#5B6472">validate()</text>
+
+  <!-- VALIDATING -->
+  <circle cx="320" cy="200" r="66" fill="url(#orangeGrad)" filter="url(#strongShadow)"/>
+  <text x="320" y="194" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#7A4A1E">VALIDATING</text>
+  <text x="320" y="212" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#7A4A1E">Bean Validation</text>
+  <text x="320" y="224" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#7A4A1E">checks constraints</text>
+
+  <!-- to VALID -->
+  <line x1="360" y1="150" x2="470" y2="94" stroke="#5FAE84" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="425" y="108" text-anchor="middle" font-size="9.5" fill="#2E6B4B" font-weight="600">all constraints pass</text>
+
+  <!-- to REJECTED -->
+  <line x1="360" y1="250" x2="470" y2="306" stroke="#C9776A" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="425" y="298" text-anchor="middle" font-size="9.5" fill="#8A4A3E" font-weight="600">constraint violated</text>
+
+  <!-- VALID -->
+  <circle cx="540" cy="80" r="64" fill="url(#greenGrad)" filter="url(#strongShadow)"/>
+  <text x="540" y="74" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#1E5B3B">VALID</text>
+  <text x="540" y="92" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#1E5B3B">ready to hand</text>
+  <text x="540" y="104" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#1E5B3B">to a producer</text>
+
+  <line x1="602" y1="80" x2="668" y2="80" stroke="#8592A6" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+
+  <!-- PUBLISHED (future, dashed) -->
+  <circle cx="740" cy="80" r="58" fill="#F1F3F5" stroke="#B9C0CA" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="740" y="74" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="600" fill="#5B6472">PUBLISHED</text>
+  <text x="740" y="92" text-anchor="middle" dominant-baseline="middle" font-size="8.5" fill="#8A93A0">arrives Day 4</text>
+
+  <!-- REJECTED -->
+  <circle cx="540" cy="320" r="64" fill="url(#redGrad)" filter="url(#strongShadow)"/>
+  <text x="540" y="314" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#6B2E24">REJECTED</text>
+  <text x="540" y="332" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#6B2E24">violations returned,</text>
+  <text x="540" y="344" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#6B2E24">event discarded</text>
+
+  <text x="410" y="396" text-anchor="middle" font-size="11" fill="#5B6472">Today's module implements CREATED through REJECTED/VALID — PUBLISHED is Day 4's job.</text>
+</svg>
