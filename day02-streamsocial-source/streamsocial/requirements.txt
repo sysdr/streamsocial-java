@@ -1,0 +1,2 @@
+# This repository is a Java/Maven project.
+# No Python dependencies are required for the current lessons.
