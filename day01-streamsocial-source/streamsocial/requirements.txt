@@ -1,0 +1,5 @@
+# StreamSocial Day 1 — build and runtime prerequisites
+# Install Java 21+ and Maven 3.9+ before building.
+
+java>=21
+maven>=3.9
