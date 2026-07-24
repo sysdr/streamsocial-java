@@ -1,0 +1,123 @@
+<svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1a1a1a" flood-opacity="0.16"/>
+    </filter>
+    <filter id="strongShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1a1a1a" flood-opacity="0.26"/>
+    </filter>
+    <linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD3CC"/>
+      <stop offset="100%" stop-color="#FFB3A6"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CFF3DE"/>
+      <stop offset="100%" stop-color="#A7E8C2"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE0C2"/>
+      <stop offset="100%" stop-color="#FFC38A"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D3E7FB"/>
+      <stop offset="100%" stop-color="#A9CDF3"/>
+    </linearGradient>
+    <linearGradient id="baseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F3FBF6"/>
+      <stop offset="100%" stop-color="#E4F5EA"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8592A6"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="600" fill="#ffffff"/>
+
+  <text x="450" y="34" text-anchor="middle" dominant-baseline="middle" font-size="20" font-weight="700" fill="#2A2E35">Why StreamSocial is event-driven</text>
+
+  <!-- Panel A: request-response -->
+  <g transform="translate(40,60)">
+    <rect x="0" y="0" width="380" height="180" rx="18" fill="#FBFBFB" stroke="#E7E9ED" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="190" y="28" text-anchor="middle" dominant-baseline="middle" font-size="14" font-weight="700" fill="#7A4A42">Request-response (tightly coupled)</text>
+
+    <rect x="24" y="60" width="90" height="42" rx="12" fill="url(#redGrad)" filter="url(#softShadow)"/>
+    <text x="69" y="81" text-anchor="middle" dominant-baseline="middle" font-size="11.5" fill="#6B2E24">Client</text>
+
+    <rect x="146" y="60" width="100" height="42" rx="12" fill="url(#redGrad)" filter="url(#softShadow)"/>
+    <text x="196" y="81" text-anchor="middle" dominant-baseline="middle" font-size="11.5" fill="#6B2E24">Feed Service</text>
+
+    <rect x="278" y="60" width="80" height="42" rx="12" fill="url(#redGrad)" filter="url(#softShadow)"/>
+    <text x="318" y="81" text-anchor="middle" dominant-baseline="middle" font-size="11.5" fill="#6B2E24">Notify Svc</text>
+
+    <line x1="114" y1="81" x2="144" y2="81" stroke="#C9776A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="246" y1="81" x2="276" y2="81" stroke="#C9776A" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <text x="190" y="140" text-anchor="middle" font-size="11" fill="#7A4A42">every call blocks and waits</text>
+    <text x="190" y="158" text-anchor="middle" font-size="11" fill="#7A4A42">all three services must be up now</text>
+  </g>
+
+  <!-- Panel B: event-driven -->
+  <g transform="translate(460,60)">
+    <rect x="0" y="0" width="400" height="180" rx="18" fill="#FBFDFB" stroke="#E7E9ED" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="200" y="28" text-anchor="middle" dominant-baseline="middle" font-size="14" font-weight="700" fill="#2E6B4B">Event-driven (StreamSocial)</text>
+
+    <rect x="20" y="58" width="86" height="42" rx="12" fill="url(#greenGrad)" filter="url(#softShadow)"/>
+    <text x="63" y="79" text-anchor="middle" dominant-baseline="middle" font-size="11.5" fill="#1E5B3B">Producer</text>
+
+    <rect x="152" y="58" width="100" height="42" rx="12" fill="#F1F3F5" stroke="#B9C0CA" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="202" y="73" text-anchor="middle" dominant-baseline="middle" font-size="10.5" fill="#5B6472">Kafka Topic</text>
+    <text x="202" y="87" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#8A93A0">arrives Day 2</text>
+
+    <rect x="296" y="30" width="88" height="34" rx="10" fill="url(#greenGrad)" filter="url(#softShadow)"/>
+    <text x="340" y="47" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#1E5B3B">Feed Svc</text>
+
+    <rect x="296" y="72" width="88" height="34" rx="10" fill="url(#greenGrad)" filter="url(#softShadow)"/>
+    <text x="340" y="89" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#1E5B3B">Trend Svc</text>
+
+    <rect x="296" y="114" width="88" height="34" rx="10" fill="url(#greenGrad)" filter="url(#softShadow)"/>
+    <text x="340" y="131" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#1E5B3B">Notify Svc</text>
+
+    <line x1="106" y1="79" x2="150" y2="79" stroke="#7CB69A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="252" y1="79" x2="294" y2="47" stroke="#7CB69A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="252" y1="79" x2="294" y2="89" stroke="#7CB69A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="252" y1="79" x2="294" y2="131" stroke="#7CB69A" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <text x="200" y="164" text-anchor="middle" font-size="11" fill="#2E6B4B">publish once, consumers read independently</text>
+  </g>
+
+  <!-- Bottom: today's module, elevated -->
+  <g transform="translate(40,280)">
+    <rect x="0" y="0" width="820" height="290" rx="24" fill="url(#baseGrad)" stroke="#B7E0C6" stroke-width="1.5" filter="url(#strongShadow)"/>
+    <text x="410" y="34" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" fill="#1E5B3B">TODAY — streamsocial-common</text>
+    <text x="410" y="54" text-anchor="middle" dominant-baseline="middle" font-size="11.5" fill="#3F6E58">the contract every producer and consumer built later agrees on</text>
+
+    <!-- sealed interface -->
+    <rect x="300" y="76" width="220" height="52" rx="16" fill="#ffffff" stroke="#3F8A63" stroke-width="2" filter="url(#softShadow)"/>
+    <text x="410" y="97" text-anchor="middle" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#1E5B3B">sealed DomainEvent</text>
+    <text x="410" y="114" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#3F6E58">eventId · occurredAt · eventType()</text>
+
+    <line x1="410" y1="128" x2="150" y2="168" stroke="#7CB69A" stroke-width="2"/>
+    <line x1="410" y1="128" x2="410" y2="168" stroke="#7CB69A" stroke-width="2"/>
+    <line x1="410" y1="128" x2="670" y2="168" stroke="#7CB69A" stroke-width="2"/>
+
+    <!-- three subtype chips -->
+    <rect x="40" y="168" width="220" height="86" rx="16" fill="url(#orangeGrad)" filter="url(#softShadow)"/>
+    <text x="150" y="192" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#7A4A1E">UserActionEvent</text>
+    <text x="150" y="212" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#7A4A1E">POST_CREATED · POST_DELETED</text>
+    <text x="150" y="228" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#7A4A1E">USER_FOLLOWED · USER_UNFOLLOWED</text>
+    <text x="150" y="244" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#7A4A1E">PROFILE_UPDATED</text>
+
+    <rect x="300" y="168" width="220" height="86" rx="16" fill="url(#blueGrad)" filter="url(#softShadow)"/>
+    <text x="410" y="192" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#1E4A7A">ContentInteractionEvent</text>
+    <text x="410" y="212" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#1E4A7A">CONTENT_LIKED</text>
+    <text x="410" y="228" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#1E4A7A">CONTENT_COMMENTED</text>
+    <text x="410" y="244" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#1E4A7A">CONTENT_SHARED</text>
+
+    <rect x="560" y="168" width="220" height="86" rx="16" fill="url(#greenGrad)" filter="url(#softShadow)"/>
+    <text x="670" y="192" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#1E5B3B">SystemEvent</text>
+    <text x="670" y="212" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#1E5B3B">CONTENT_MODERATION_FLAGGED</text>
+    <text x="670" y="228" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#1E5B3B">RECOMMENDATION_MODEL_UPDATED</text>
+
+    <text x="410" y="274" text-anchor="middle" dominant-baseline="middle" font-size="10.5" fill="#3F6E58">10 event types total — this is what Day 4's producer will publish</text>
+  </g>
+</svg>

@@ -1,0 +1,78 @@
+<svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1a1a1a" flood-opacity="0.16"/>
+    </filter>
+    <filter id="strongShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#1a1a1a" flood-opacity="0.26"/>
+    </filter>
+    <radialGradient id="blueGrad" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#E3F0FD"/>
+      <stop offset="100%" stop-color="#A9CDF3"/>
+    </radialGradient>
+    <radialGradient id="orangeGrad" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFEBD6"/>
+      <stop offset="100%" stop-color="#FFC38A"/>
+    </radialGradient>
+    <radialGradient id="greenGrad" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#DFF8E9"/>
+      <stop offset="100%" stop-color="#9EE3BE"/>
+    </radialGradient>
+    <radialGradient id="redGrad" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFE6E1"/>
+      <stop offset="100%" stop-color="#FFB3A6"/>
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8592A6"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="860" height="420" fill="#ffffff"/>
+  <text x="430" y="30" text-anchor="middle" dominant-baseline="middle" font-size="17" font-weight="700" fill="#2A2E35">A single request's state, end to end</text>
+
+  <!-- RECEIVED -->
+  <circle cx="110" cy="210" r="64" fill="url(#blueGrad)" filter="url(#strongShadow)"/>
+  <text x="110" y="204" text-anchor="middle" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#1E4A7A">RECEIVED</text>
+  <text x="110" y="222" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#1E4A7A">HTTP POST parsed</text>
+
+  <line x1="174" y1="210" x2="236" y2="150" stroke="#8592A6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="174" y1="210" x2="236" y2="280" stroke="#C9776A" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- REJECTED -->
+  <circle cx="310" cy="320" r="60" fill="url(#redGrad)" filter="url(#strongShadow)"/>
+  <text x="310" y="314" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#6B2E24">REJECTED</text>
+  <text x="310" y="332" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#6B2E24">400, validation failed</text>
+  <text x="230" y="270" text-anchor="middle" font-size="9.5" fill="#8A4A3E" font-weight="600">invalid</text>
+
+  <!-- PUBLISHING -->
+  <circle cx="310" cy="110" r="64" fill="url(#orangeGrad)" filter="url(#strongShadow)"/>
+  <text x="310" y="102" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#7A4A1E">PUBLISHING</text>
+  <text x="310" y="120" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#7A4A1E">send() called,</text>
+  <text x="310" y="132" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#7A4A1E">awaiting ack</text>
+  <text x="220" y="164" text-anchor="middle" font-size="9.5" fill="#5B6472">valid</text>
+
+  <line x1="374" y1="90" x2="460" y2="70" stroke="#5FAE84" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="374" y1="140" x2="460" y2="230" stroke="#C9776A" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ACKNOWLEDGED -->
+  <circle cx="560" cy="70" r="64" fill="url(#greenGrad)" filter="url(#strongShadow)"/>
+  <text x="560" y="62" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#1E5B3B">ACKNOWLEDGED</text>
+  <text x="560" y="80" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#1E5B3B">202, real</text>
+  <text x="560" y="92" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#1E5B3B">partition + offset</text>
+  <text x="420" y="66" text-anchor="middle" font-size="9.5" fill="#2E6B4B" font-weight="600">broker acked in time</text>
+
+  <!-- FAILED -->
+  <circle cx="560" cy="260" r="64" fill="url(#redGrad)" filter="url(#strongShadow)"/>
+  <text x="560" y="252" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#6B2E24">FAILED</text>
+  <text x="560" y="270" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#6B2E24">503, timeout or</text>
+  <text x="560" y="282" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#6B2E24">broker error</text>
+  <text x="440" y="228" text-anchor="middle" font-size="9.5" fill="#8A4A3E" font-weight="600">timeout / exception</text>
+
+  <!-- downstream, dashed future -->
+  <line x1="624" y1="70" x2="700" y2="70" stroke="#B9C0CA" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <circle cx="770" cy="70" r="56" fill="#F1F3F5" stroke="#B9C0CA" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="770" y="64" text-anchor="middle" dominant-baseline="middle" font-size="10.5" font-weight="600" fill="#5B6472">CONSUMED</text>
+  <text x="770" y="80" text-anchor="middle" dominant-baseline="middle" font-size="8.5" fill="#8A93A0">Day 5</text>
+
+  <text x="430" y="392" text-anchor="middle" font-size="11" fill="#5B6472">REJECTED and FAILED never reach a partition — only ACKNOWLEDGED events exist for Day 5's consumer to read.</text>
+</svg>

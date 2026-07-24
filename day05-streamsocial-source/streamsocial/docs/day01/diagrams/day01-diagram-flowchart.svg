@@ -1,0 +1,83 @@
+<svg viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1a1a1a" flood-opacity="0.16"/>
+    </filter>
+    <filter id="strongShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#1a1a1a" flood-opacity="0.24"/>
+    </filter>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D3E7FB"/>
+      <stop offset="100%" stop-color="#A9CDF3"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE0C2"/>
+      <stop offset="100%" stop-color="#FFC38A"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CFF3DE"/>
+      <stop offset="100%" stop-color="#A0E4C0"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD9D2"/>
+      <stop offset="100%" stop-color="#FFB3A6"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8592A6"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="640" height="640" fill="#ffffff"/>
+  <text x="320" y="32" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="700" fill="#2A2E35">One event's journey through Day 1</text>
+
+  <!-- 1 actor action -->
+  <rect x="190" y="60" width="260" height="52" rx="26" fill="url(#blueGrad)" filter="url(#softShadow)"/>
+  <text x="320" y="86" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="600" fill="#1E4A7A">User performs an action</text>
+
+  <line x1="320" y1="112" x2="320" y2="150" stroke="#8592A6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 2 construct record -->
+  <rect x="150" y="150" width="340" height="60" rx="16" fill="url(#orangeGrad)" filter="url(#softShadow)"/>
+  <text x="320" y="174" text-anchor="middle" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#7A4A1E">Construct DomainEvent record</text>
+  <text x="320" y="192" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#7A4A1E">UserActionEvent / ContentInteractionEvent / SystemEvent</text>
+
+  <line x1="320" y1="210" x2="320" y2="250" stroke="#8592A6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 3 decision diamond -->
+  <g transform="translate(320,320)">
+    <polygon points="0,-72 150,0 0,72 -150,0" fill="#FBFBFB" stroke="#5B6472" stroke-width="1.8" filter="url(#strongShadow)"/>
+    <text x="0" y="-8" text-anchor="middle" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#2A2E35">Bean Validation</text>
+    <text x="0" y="12" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#2A2E35">all constraints satisfied?</text>
+  </g>
+
+  <!-- valid branch -->
+  <line x1="470" y1="320" x2="540" y2="320" stroke="#5FAE84" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="500" y="308" text-anchor="middle" font-size="10.5" fill="#2E6B4B" font-weight="600">yes</text>
+
+  <rect x="470" y="350" width="150" height="52" rx="14" fill="url(#greenGrad)" filter="url(#softShadow)"/>
+  <text x="545" y="370" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#1E5B3B">Valid event</text>
+  <text x="545" y="386" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#1E5B3B">in memory, typed</text>
+
+  <line x1="545" y1="402" x2="545" y2="440" stroke="#8592A6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="440" y="440" width="210" height="54" rx="14" fill="#F1F3F5" stroke="#B9C0CA" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="545" y="461" text-anchor="middle" dominant-baseline="middle" font-size="10.5" fill="#5B6472">Handed to Kafka producer</text>
+  <text x="545" y="477" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#8A93A0">arrives Day 4</text>
+
+  <!-- invalid branch -->
+  <line x1="170" y1="320" x2="100" y2="320" stroke="#C9776A" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="135" y="308" text-anchor="middle" font-size="10.5" fill="#8A4A3E" font-weight="600">no</text>
+
+  <rect x="-30" y="294" width="150" height="52" rx="14" fill="url(#redGrad)" filter="url(#softShadow)"/>
+  <text x="45" y="314" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#6B2E24">Constraint</text>
+  <text x="45" y="330" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="#6B2E24">violation(s)</text>
+
+  <line x1="45" y1="346" x2="45" y2="440" stroke="#8592A6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="-30" y="440" width="150" height="66" rx="14" fill="#FBFBFB" stroke="#E7E9ED" stroke-width="1.5" filter="url(#softShadow)"/>
+  <text x="45" y="462" text-anchor="middle" dominant-baseline="middle" font-size="10.5" font-weight="600" fill="#5B6472">Rejected</text>
+  <text x="45" y="480" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#8A93A0">never leaves this</text>
+  <text x="45" y="494" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#8A93A0">module today</text>
+
+  <text x="320" y="560" text-anchor="middle" font-size="11" fill="#5B6472">Validation happens once, at construction — every downstream lesson trusts a valid event without re-checking it.</text>
+</svg>

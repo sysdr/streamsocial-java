@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: streamsocial-engagement-consumer
+  main:
+    web-application-type: none
+
+streamsocial:
+  kafka:
+    bootstrap-servers: localhost:29092,localhost:29093,localhost:29094
+
+logging:
+  level:
+    org.apache.kafka: WARN
+    com.streamsocial: INFO
