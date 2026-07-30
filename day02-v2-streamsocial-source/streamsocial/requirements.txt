@@ -1,0 +1,12 @@
+# StreamSocial runtime / tooling requirements (Day 2 snapshot)
+# This is a Java/Maven + Docker project, not a Python app.
+# Install these on the host before running ./start.sh
+
+# Java JDK 17+ (project compiler release is 21)
+# Maven 3.9+
+# Docker Engine or Docker Desktop with Compose plugin (4GB+ RAM for Kafka)
+
+java>=17
+maven>=3.9
+docker>=24
+docker-compose>=2.20

@@ -1,0 +1,104 @@
+# StreamSocial Kafka cluster - Day 2.
+#
+# 3 brokers, KRaft mode, no Zookeeper. Each node runs combined
+# broker+controller roles - the standard shape for a small teaching
+# cluster. Follows Appendix B/C's pinned pattern exactly: internal
+# listener on :19092 (inter-broker traffic only, never exposed to the
+# host), each broker's external PLAINTEXT_HOST listener on its own
+# reserved host port (9092/9093/9094 - Appendix B's reserved-ports
+# table), and Confluent's own long-standing published CLUSTER_ID value
+# reused verbatim rather than inventing a new one.
+#
+# KAFKA_AUTO_CREATE_TOPICS_ENABLE=false is deliberate: it forces every
+# topic through Day 3's idempotent AdminClient bootstrap instead of
+# letting the first stray producer create one with whatever partition
+# count it happens to ask for.
+
+name: streamsocial
+
+x-kafka-common: &kafka-common
+  image: confluentinc/cp-kafka:7.7.1
+  networks:
+    - streamsocial-net
+  environment: &kafka-common-env
+    KAFKA_PROCESS_ROLES: broker,controller
+    KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+    KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+    KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:19093,2@kafka-2:19093,3@kafka-3:19093
+    CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+    KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+    KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+    KAFKA_LOG_DIRS: /var/lib/kafka/data
+    KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+
+services:
+  kafka-1:
+    <<: *kafka-common
+    hostname: kafka-1
+    container_name: streamsocial-kafka-1
+    ports:
+      - "9092:9092"
+    environment:
+      <<: *kafka-common-env
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENERS: PLAINTEXT://kafka-1:19092,CONTROLLER://kafka-1:19093,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:19092,PLAINTEXT_HOST://localhost:9092
+    volumes:
+      - kafka-1-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:19092"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+
+  kafka-2:
+    <<: *kafka-common
+    hostname: kafka-2
+    container_name: streamsocial-kafka-2
+    ports:
+      - "9093:9093"
+    environment:
+      <<: *kafka-common-env
+      KAFKA_NODE_ID: 2
+      KAFKA_LISTENERS: PLAINTEXT://kafka-2:19092,CONTROLLER://kafka-2:19093,PLAINTEXT_HOST://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:19092,PLAINTEXT_HOST://localhost:9093
+    volumes:
+      - kafka-2-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:19092"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+
+  kafka-3:
+    <<: *kafka-common
+    hostname: kafka-3
+    container_name: streamsocial-kafka-3
+    ports:
+      - "9094:9094"
+    environment:
+      <<: *kafka-common-env
+      KAFKA_NODE_ID: 3
+      KAFKA_LISTENERS: PLAINTEXT://kafka-3:19092,CONTROLLER://kafka-3:19093,PLAINTEXT_HOST://0.0.0.0:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:19092,PLAINTEXT_HOST://localhost:9094
+    volumes:
+      - kafka-3-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:19092"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+
+networks:
+  streamsocial-net:
+    name: streamsocial-net
+
+volumes:
+  kafka-1-data:
+  kafka-2-data:
+  kafka-3-data:
