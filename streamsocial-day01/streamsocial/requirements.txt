@@ -1,0 +1,13 @@
+# StreamSocial Day 1 — runtime / build requirements
+# (Java/Maven project; listed here for environment setup checklists)
+
+# Required
+# - Java JDK 17 or newer (JDK 21 supported; compiler release is 17)
+# - Apache Maven 3.9+ (3.8.x often works for this snapshot)
+
+# Optional until Day 2+
+# - Docker Engine + Docker Compose plugin
+
+java>=17
+maven>=3.9
+# docker  # optional until infra module exists
