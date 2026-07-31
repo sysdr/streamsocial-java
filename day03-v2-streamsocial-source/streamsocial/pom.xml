@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.streamsocial</groupId>
+  <artifactId>streamsocial</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>StreamSocial</name>
+  <description>
+    Kafka Mastery: Building StreamSocial - Java &amp; Spring Boot Edition.
+    Reactor project. Modules are added, never removed, one per lesson.
+  </description>
+
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.10.2</junit.version>
+    <assertj.version>3.25.3</assertj.version>
+    <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
+    <jakarta.validation.version>3.0.2</jakarta.validation.version>
+    <jakarta.el.version>4.0.2</jakarta.el.version>
+    <!-- Appendix B: Kafka 3.7.x line, KRaft mode only -->
+    <kafka.clients.version>3.7.1</kafka.clients.version>
+    <!--
+      Appendix B, field-tested correction: no Spring Boot BOM exists in
+      this reactor yet (that starts Day 4), so this has to be pinned
+      directly rather than left to a BOM to resolve. When the BOM does
+      arrive, it resolves 1.19.8 too - this value won't need to change.
+    -->
+    <testcontainers.version>1.19.8</testcontainers.version>
+  </properties>
+
+  <!--
+    Module list. Day 1 introduces streamsocial-common only.
+    Later lessons append modules here; this list is never pruned.
+  -->
+  <modules>
+    <module>streamsocial-common</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <!--
+            Not bound in any module yet - Day 2 has no *IT.java. Pinned
+            here, matching the Surefire version, so any later module
+            that adds a Testcontainers-backed *IT.java only needs to
+            declare this plugin in its own <build><plugins>, not choose
+            a version (Appendix C: Surefire's default include pattern
+            never matches *IT.java at all).
+          -->
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

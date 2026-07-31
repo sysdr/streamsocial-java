@@ -1,0 +1,20 @@
+# StreamSocial (Day 3) — runtime / toolchain requirements
+# This is a Java/Maven project (not Python). Listed for environment setup.
+
+# Language & build
+java>=21
+maven>=3.8.7
+
+# Container runtime (3-broker KRaft Kafka cluster)
+docker>=24
+docker-compose>=2.20
+
+# Optional host tools used by scripts
+bash>=5
+curl
+
+# Notes
+# - No cloud API keys are required for this snapshot.
+# - Kafka image: confluentinc/cp-kafka:7.7.1 (pulled by Docker Compose)
+# - Bootstrap servers after ./start.sh: localhost:9092,localhost:9093,localhost:9094
+# - Tear down: ./stop.sh  |  full Docker reclaim: ./cleanup.sh [--all]
