@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: streamsocial-dashboard
+
+dashboard:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092,localhost:9093,localhost:9094}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StreamSocial — Live Dashboard</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-border: #262b35;
+    --text: #e8eaed;
+    --muted: #8a92a3;
+    --orange: #ff9d52;
+    --blue: #5aa9dd;
+    --green: #4fd68e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% -10%, #1b2030 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    padding: 32px 24px 64px;
+  }
+  header { max-width: 1000px; margin: 0 auto 28px; display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  header h1 { font-size: 20px; font-weight: 600; margin: 0; letter-spacing: 0.2px; }
+  header .day-badge { font-size: 12px; color: var(--muted); border: 1px solid var(--panel-border); padding: 4px 10px; border-radius: 999px; }
+  #connection-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 6px; }
+  #connection-dot.live { background: var(--green); box-shadow: 0 0 8px var(--green); }
+
+  .grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .card {
+    background: linear-gradient(180deg, var(--panel) 0%, #14161c 100%);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+  }
+  .card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px; }
+  .card .value { font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .card .value.orange { color: var(--orange); }
+  .card .value.blue { color: var(--blue); }
+  .card .sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  .spark-card { grid-column: 1 / -1; }
+  #sparkline { width: 100%; height: 90px; display: block; }
+
+  footer { max-width: 1000px; margin: 28px auto 0; font-size: 12px; color: var(--muted); }
+  code { background: #1e2230; padding: 2px 6px; border-radius: 6px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1><span id="connection-dot"></span>StreamSocial — Live Dashboard</h1>
+    <span class="day-badge">Day 4 · user-actions throughput</span>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <div class="label">Events / second</div>
+      <div class="value orange" id="rate">0</div>
+      <div class="sub">real consumption of the <code>user-actions</code> topic, not simulated</div>
+    </div>
+    <div class="card">
+      <div class="label">Total events since dashboard started</div>
+      <div class="value blue" id="total">0</div>
+      <div class="sub" id="status">connecting…</div>
+    </div>
+    <div class="card spark-card">
+      <div class="label">Last 30 seconds</div>
+      <svg id="sparkline" viewBox="0 0 600 90" preserveAspectRatio="none"></svg>
+    </div>
+  </div>
+
+  <footer>Fed by a raw <code>kafka-clients</code> Consumer polling <code>user-actions</code> from <code>latest</code> — POST to the producer service at <code>/api/posts</code> and watch this update.</footer>
+
+<script>
+  const rateEl = document.getElementById('rate');
+  const totalEl = document.getElementById('total');
+  const statusEl = document.getElementById('status');
+  const dotEl = document.getElementById('connection-dot');
+  const sparkEl = document.getElementById('sparkline');
+
+  function render(history) {
+    const w = 600, h = 90, pad = 4;
+    const max = Math.max(1, ...history);
+    const n = history.length;
+    if (n < 2) { sparkEl.innerHTML = ''; return; }
+    const stepX = (w - pad * 2) / (n - 1);
+    const points = history.map((v, i) => {
+      const x = pad + i * stepX;
+      const y = h - pad - (v / max) * (h - pad * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    sparkEl.innerHTML = `
+      <polyline points="${points}" fill="none" stroke="#ff9d52" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <polyline points="${pad},${h - pad} ${points} ${w - pad},${h - pad}" fill="rgba(255,157,82,0.12)" stroke="none"/>
+    `;
+  }
+
+  const source = new EventSource('/api/dashboard/stream');
+
+  source.onopen = () => {
+    dotEl.classList.add('live');
+    statusEl.textContent = 'live — connected via SSE';
+  };
+
+  source.onerror = () => {
+    dotEl.classList.remove('live');
+    statusEl.textContent = 'reconnecting…';
+  };
+
+  source.onmessage = (evt) => {
+    const snapshot = JSON.parse(evt.data);
+    rateEl.textContent = snapshot.eventsPerSecond;
+    totalEl.textContent = snapshot.totalEvents;
+    render(snapshot.history);
+  };
+</script>
+</body>
+</html>

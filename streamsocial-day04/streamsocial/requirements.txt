@@ -1,0 +1,11 @@
+# StreamSocial Day 4 — runtime / tool requirements
+# (Java/Maven project; listed here for environment setup reference)
+
+java>=17
+maven>=3.9
+docker>=24.0
+docker-compose>=2.0
+
+# Optional tooling
+curl
+bash>=4.0
