@@ -1,3 +1,4 @@
+## [Course Link](https://handsonkafka.substack.com/)
 # StreamSocial
 
 Kafka Mastery: Building StreamSocial — Java & Spring Boot Edition.
