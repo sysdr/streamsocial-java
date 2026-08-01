@@ -1,6 +1,5 @@
 ## [Course Link](https://handsonkafka.substack.com/)
 ## Introduction
-------------
 
 Event-driven systems are one of the most deceptively difficult problems in backend engineering. Every non-trivial platform eventually needs to move data between services in real time, fan events out to dozens of downstream consumers, or guarantee that a payment event is processed exactly once — and the moment a system moves past a single-broker tutorial setup, the simple producer-and-consumer pattern that worked in a five-minute quickstart starts causing duplicate processing, out-of-order writes, and silent data loss in production.
 
@@ -11,12 +10,10 @@ Hands On Kafka is a reader-supported publication. To receive new posts and suppo
 The material is organized as a 60-day publishing plan, with each day representing a focused lesson that builds directly on the one before it, inside a single continuously growing codebase. Java 17 and Spring Boot are the implementation language throughout — the JVM-native, production-standard way real teams actually run Kafka clients — but Kafka itself is the subject of every lesson. By the end, learners will have designed, coded, and operated a distributed, event-driven social platform called StreamSocial, comparable in shape to the real-time backbones behind large-scale social and activity-feed systems, built from first principles, one architectural decision at a time.
 
 ## Why This Course Matters :
--------------------------
 
 Event-driven architecture sits at the center of modern backend systems. Activity feeds, engagement and analytics pipelines, fraud and trust signals, recommendation inputs, and cross-service communication all depend on a messaging backbone that can move enormous volumes of data without losing ordering, duplicating writes, or falling over during a rebalance. As companies move from request-response APIs to event-driven architectures, a naive producer-consumer setup becomes a liability rather than a convenience, and engineers are expected to understand why.
 
 ## Common challenges learners face:
---------------------------------
 
 Most Java developers know how to call send() on a KafkaTemplate, but far fewer understand what happens when that producer retries under network failure, or when a consumer group rebalances mid-batch. Typical pain points include:
 
@@ -32,12 +29,10 @@ Most Java developers know how to call send() on a KafkaTemplate, but far fewe
     
 
 ## Skills addressed by the course :
---------------------------------
 
 The curriculum directly targets these gaps by teaching producer reliability (idempotence, transactions, acknowledgment strategies, custom partitioning), consumer resilience (manual commits, rebalance listeners, dead letter queues), schema management (JSON Schema, Avro, Protobuf, and Schema Registry compatibility modes), data integration (Kafka Connect, custom connectors, Debezium-based CDC), stream processing (the Kafka Streams DSL and the low-level Processor API), and full production operations (observability, SASL/TLS/ACL security, and a real microservices split).
 
 ## Learning Outcomes
------------------
 
 By the end of the course, learners will be able to:
 
@@ -63,14 +58,12 @@ By the end of the course, learners will be able to:
     
 
 ## Practical Applications
-----------------------
 
 The concepts in this course map directly onto real engineering work. Producer and consumer reliability patterns apply to any system moving data through a message broker — not just Kafka, but any queue-backed pipeline that needs to avoid duplication and data loss. The schema-management arc in Module 3 is directly transferable to any service boundary where data contracts need to evolve without breaking consumers. The Connect and CDC patterns in Module 4 are the same techniques used to build real-time data lakes, analytics pipelines, and cross-database synchronization in production systems. The stream-processing work in Module 5 mirrors what real-time analytics and fraud-detection teams build, and the observability and security work in Module 6 is standard practice for operating any Kafka-backed platform in production.
 
 Taken together, the completed project functions as a credible portfolio piece for backend, platform, or data infrastructure engineering roles, and the individual modules serve as standalone references that can be revisited whenever a related problem — schema evolution, exactly-once processing, connector development — comes up in professional work.
 
 ## Conclusion
-----------
 
 Event-driven systems sit at the intersection of several of the hardest problems in backend engineering — ordering, delivery guarantees, schema evolution, and operational trust — and this course was designed to teach all of them through the lens of a single, coherent, incrementally built system. Rather than presenting isolated Kafka features in the abstract, each of the 60 lessons adds a working piece to the same architecture, so that by the end, the concepts of producer reliability, consumer correctness, stream processing, and production security are not just understood but implemented.
 
