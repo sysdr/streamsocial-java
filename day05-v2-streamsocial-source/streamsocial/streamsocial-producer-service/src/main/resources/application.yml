@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: streamsocial-producer-service
+
+server:
+  port: 8082
+
+streamsocial:
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+
+logging:
+  level:
+    org.apache.kafka: WARN
+    com.streamsocial: INFO

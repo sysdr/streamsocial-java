@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreamSocial Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__brand">
+      <span class="topbar__mark">SS</span>
+      <div>
+        <div class="topbar__title">StreamSocial</div>
+        <div class="topbar__subtitle">Live system dashboard — Hands On Kafka</div>
+      </div>
+    </div>
+    <div class="topbar__day">Day 5</div>
+  </header>
+
+  <main class="grid" id="panel-grid">
+    <section class="panel" id="panel-user-actions" data-stream="user-actions">
+      <div class="panel__header">
+        <h2 class="panel__title">user-actions</h2>
+        <span class="panel__badge panel__badge--live">
+          <span class="dot"></span> live
+        </span>
+      </div>
+      <div class="panel__stats">
+        <div class="stat">
+          <div class="stat__value" id="user-actions-count">0</div>
+          <div class="stat__label">events seen this session</div>
+        </div>
+      </div>
+      <ul class="feed" id="user-actions-feed"></ul>
+    </section>
+
+    <section class="panel" id="panel-content-interactions" data-stream="content-interactions">
+      <div class="panel__header">
+        <h2 class="panel__title">content-interactions</h2>
+        <span class="panel__badge panel__badge--live">
+          <span class="dot"></span> live
+        </span>
+      </div>
+      <div class="panel__stats">
+        <div class="stat">
+          <div class="stat__value" id="content-interactions-count">0</div>
+          <div class="stat__label">events seen this session</div>
+        </div>
+      </div>
+      <ul class="feed" id="content-interactions-feed"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Every panel here reads real, live data from the running system —
+    nothing on this page is synthetic.
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

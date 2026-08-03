@@ -1,0 +1,16 @@
+# StreamSocial system requirements (Java / Maven / Docker project).
+# Not a pip requirements file — lists required tools and versions.
+
+# Runtime
+java>=17
+
+# Build
+maven>=3.9
+
+# Infrastructure
+docker>=24
+docker-compose>=2.20
+
+# Optional
+# curl — smoke-test the producer REST API
+# bash — start.sh / stop.sh / cleanup.sh

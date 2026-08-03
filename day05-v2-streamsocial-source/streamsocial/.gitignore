@@ -1,0 +1,44 @@
+# Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# IDE / editor
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets/
+
+# Logs / temp
+*.log
+logs/
+tmp/
+temp/
+
+# Test / coverage
+.classpath
+.project
+.settings/
+.factorypath
